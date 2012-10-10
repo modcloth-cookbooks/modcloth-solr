@@ -6,7 +6,7 @@ This configures Solr to be used with Sunspot by default.
 
 ## REQUIREMENTS:
 
-This cookbook currently only works on SmartOS.
+This cookbook has only been tested on SmartOS.
 
 ## ATTRIBUTES:
 

@@ -51,11 +51,10 @@ template "#{node.solr.replica.home}/solr/conf/solrconfig.xml" do
   })
 end
 
-if node.solr.uses_sunspot
-  template "#{node.solr.replica.home}/solr/conf/schema.xml" do
-    owner "solr"
-    mode "0600"
-  end
+template "#{node.solr.replica.home}/solr/conf/schema.xml" do
+  owner "solr"
+  mode "0600"
+  only_if { node.solr.uses_sunspot }
 end
 
 # create/import smf manifest
