@@ -15,6 +15,8 @@ default.solr.auto_commit = {
   :max_time => nil
 }
 
+default.solr.only_bind_private_ip = false
+
 default.solr.users = []
 default.solr.master.hostname = 'localhost'
 default.solr.master.port = 9985

@@ -3,10 +3,16 @@ maintainer_email "ops@modcloth.com"
 license          "Apache 2.0"
 description      "Installs/Configures solr"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          "0.0.1"
+version          "0.0.2"
 
 depends "java"
 depends "smf"
+
+attribute "solr/only_bind_private_ip",
+  :display_name => "Bind Private IP",
+  :description => "Bind only on RFC 1918 network interfaces",
+  :default => "false",
+  :required => "optional"
 
 attribute "solr/users",
   :display_name => "Solr users",

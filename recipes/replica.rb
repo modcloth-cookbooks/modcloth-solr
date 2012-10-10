@@ -66,6 +66,13 @@ smf "solr-replica" do
   cmd << "-Dreplication.url=http://#{node.solr.master.hostname}:#{node.solr.master.port}/solr/replication"
   cmd << "-Dsolr.data.dir=#{node.solr.replica.home}/solr/data"
 
+  if node.solr.only_bind_private_ip
+    addresses = node.network.interfaces.map { |name, i| i['addresses'].keys }.flatten
+
+    bind_address = addresses.grep(/^10\.|^172\.1[6-9]\.|^172\.2\d\.|^172\.31\.|^192\.168/).first
+    cmd << "-Djetty.host=#{bind_address}"
+  end
+
   # Add NewRelic to start command if an API key is present
   cmd << "-javaagent:#{node.solr.newrelic.jar}" unless node.solr.newrelic.api_key.to_s.empty?
   cmd << "-Dnewrelic.environment=#{node.rails_env}" unless node.solr.newrelic.api_key.to_s.empty?
