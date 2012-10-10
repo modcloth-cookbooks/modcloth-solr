@@ -69,7 +69,7 @@ smf "solr-replica" do
   if node.solr.only_bind_private_ip
     addresses = node.network.interfaces.map { |name, i| i['addresses'].keys }.flatten
 
-    bind_address = addresses.grep(/^10\.|^172\.1[6-9]\.|^172\.2\d\.|^172\.31\.|^192\.168/).first
+    bind_address = addresses.grep(/^10\.|^172\.1[6-9]\.|^172\.2\d\.|^172\.3[0-1]\.|^192\.168/).first
     cmd << "-Djetty.host=#{bind_address}"
   end
 
