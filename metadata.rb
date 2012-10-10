@@ -3,7 +3,7 @@ maintainer_email "ops@modcloth.com"
 license          "Apache 2.0"
 description      "Installs/Configures solr"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          "0.0.2"
+version          "0.0.3"
 
 depends "java"
 depends "smf"
@@ -72,3 +72,30 @@ attribute "solr/replica/home",
   :description => "Directory into which solr home will be installed and configured. Defaults to /opt/solr/replica.",
   :type => "string",
   :required => "optional"
+
+attribute "solr/newrelic/api_key",
+  :display_name => "Solr NewRelic API key",
+  :description => "Api key to configure Solr NewRelic integration. Leave key empty to disable NewRelic.",
+  :type => "string",
+  :required => "optional"
+
+attribute "solr/newrelic/appdex_t",
+  :display_name => "Solr NewRelic appdex threshhold",
+  :description => "Appdex threshhold above which to warn about Solr errors",
+  :type => "string",
+  :default => "0.02",
+  :required => "optional"
+
+attribute "solr/newrelic/app_name",
+  :display_name => "Solr NewRelic app name",
+  :description => "App name with which to register events with NewRelic",
+  :type => "string",
+  :default => "Solr application",
+  :required => "recommended"
+
+attribute "solr/newrelic/environment",
+  :display_name => "Solr NewRelic environment",
+  :description => "Environment with which to configure NewRelic notifications",
+  :type => "string",
+  :default => "demo",
+  :required => "recommended"

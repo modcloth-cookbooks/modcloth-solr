@@ -1,5 +1,3 @@
-default.rails_env = 'demo'
-
 default.solr.version = '3.6.0'
 default.solr.java_dir = '/usr/java/default'
 default.solr.java_options = '-Dsolr.solr.home=/opt/solr/solr $JAVA_OPTIONS'
@@ -26,7 +24,8 @@ default.solr.replica.port = 8983
 default.solr.replica.home = '/opt/solr/replica'
 
 default.solr.newrelic = {}
+default.solr.newrelic.environment = 'demo'
 default.solr.newrelic.api_key = ''
 default.solr.newrelic.apdex_t = '0.02'
-default.solr.newrelic.app_name = 'NewRelic application'
+default.solr.newrelic.app_name = 'Solr application'
 default.solr.newrelic.jar = "/opt/solr/newrelic/newrelic.jar"

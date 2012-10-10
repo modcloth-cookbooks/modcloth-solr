@@ -13,7 +13,7 @@ common: &default_settings
   # You must specify the license key associated with your New Relic
   # account.  This key binds your Agent's data to your account in the
   # New Relic service.
-  license_key: '<%= @newrelic[:api_key] %>'
+  license_key: '<%= @newrelic["api_key"] %>'
   
   # Agent Enabled
   # Use this setting to force the agent to run or not run.
@@ -40,7 +40,7 @@ common: &default_settings
   # For example, to report data to"My Application" and "My Application 2" use this:
   # app_name: My Application;My Application 2
   # This setting is required.
-  app_name: "<%= @newrelic[:app_name] %>"
+  app_name: "<%= @newrelic["app_name"] %>"
 
   # The agent uses its own log file to keep its logging
   # separate from that of your application.  Specify the log level here.
@@ -66,7 +66,7 @@ common: &default_settings
   #log_file_path:
 
   # What is a time limit after which a request is deemed too slow?
-  apdex_t: <%= @newrelic[:apdex_t] %>
+  apdex_t: <%= @newrelic["apdex_t"] %>
   
   # The agent communicates with New Relic via http by
   # default.  If you want to communicate via https to increase
@@ -210,15 +210,6 @@ common: &default_settings
 # NOTE if your application has other named environments, you should
 # provide configuration settings for these environments here.
 
-production:
+<%= @newrelic["environment"] %>
   <<: *default_settings
-  app_name: "[prod] <%= @newrelic[:app_name] %> [Solr]"
-
-stage:
-  <<: *default_settings
-  app_name: "[stage] <%= @newrelic[:app_name] %> [Solr]"
-
-demo:
-  <<: *default_settings
-  app_name: "[demo] <%= @newrelic[:app_name] %> [Solr]"
-
+  app_name: "<%= @newrelic["app_name"] %>"

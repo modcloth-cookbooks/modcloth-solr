@@ -75,7 +75,7 @@ smf "solr-replica" do
 
   # Add NewRelic to start command if an API key is present
   cmd << "-javaagent:#{node.solr.newrelic.jar}" unless node.solr.newrelic.api_key.to_s.empty?
-  cmd << "-Dnewrelic.environment=#{node.rails_env}" unless node.solr.newrelic.api_key.to_s.empty?
+  cmd << "-Dnewrelic.environment=#{node.solr.newrelic.environment}" unless node.solr.newrelic.api_key.to_s.empty?
 
   cmd << "-jar start.jar &"
   start_command cmd.join(' ')
