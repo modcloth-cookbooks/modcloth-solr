@@ -3,7 +3,7 @@ maintainer_email "ops@modcloth.com"
 license          "Apache 2.0"
 description      "Installs/Configures solr"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          "0.0.4"
+version          "0.0.5"
 
 depends "java"
 depends "smf"
@@ -73,17 +73,10 @@ attribute "solr/replica/home",
   :type => "string",
   :required => "optional"
 
-attribute "solr/newrelic/api_key",
-  :display_name => "Solr NewRelic API key",
-  :description => "Api key to configure Solr NewRelic integration. Leave key empty to disable NewRelic.",
+attribute "solr/newrelic/license_key",
+  :display_name => "Solr NewRelic license key",
+  :description => "License key to configure Solr NewRelic integration. Leave key empty to disable NewRelic.",
   :type => "string",
-  :required => "optional"
-
-attribute "solr/newrelic/appdex_t",
-  :display_name => "Solr NewRelic appdex threshhold",
-  :description => "Appdex threshhold above which to warn about Solr errors",
-  :type => "string",
-  :default => "0.02",
   :required => "optional"
 
 attribute "solr/newrelic/app_name",
@@ -92,6 +85,13 @@ attribute "solr/newrelic/app_name",
   :type => "string",
   :default => "Solr application",
   :required => "recommended"
+
+attribute "solr/newrelic/remote_jar_file",
+  :display_name => "Solr NewRelic remote jar file location",
+  :description => "Http(s) Location of user-specific newrelic.jar file",
+  :type => "string",
+  :default => "",
+  :require => "recommended"
 
 attribute "solr/newrelic/environment",
   :display_name => "Solr NewRelic environment",

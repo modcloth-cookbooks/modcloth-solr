@@ -81,8 +81,8 @@ smf "solr-master" do
   end
 
   # Add NewRelic to start command if an API key is present
-  cmd << "-javaagent:#{node.solr.newrelic.jar}" unless node.solr.newrelic.api_key.to_s.empty?
-  cmd << "-Dnewrelic.environment=#{node.solr.newrelic.environment}" unless node.solr.newrelic.api_key.to_s.empty?
+  cmd << "-javaagent:#{node.solr.newrelic.jar}" unless node.solr.newrelic.license_key.to_s.empty?
+  cmd << "-Dnewrelic.environment=#{node.solr.newrelic.environment}" unless node.solr.newrelic.license_key.to_s.empty?
 
   cmd << "-jar start.jar &"
   start_command cmd.join(' ')

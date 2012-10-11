@@ -25,7 +25,7 @@ default.solr.replica.home = '/opt/solr/replica'
 
 default.solr.newrelic = {}
 default.solr.newrelic.environment = 'demo'
-default.solr.newrelic.api_key = ''
-default.solr.newrelic.apdex_t = '0.02'
+default.solr.newrelic.license_key = ''
 default.solr.newrelic.app_name = 'Solr application'
 default.solr.newrelic.jar = "/opt/solr/newrelic/newrelic.jar"
+default.solr.newrelic.remote_jar_file = ""

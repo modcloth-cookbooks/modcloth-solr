@@ -13,7 +13,7 @@ common: &default_settings
   # You must specify the license key associated with your New Relic
   # account.  This key binds your Agent's data to your account in the
   # New Relic service.
-  license_key: '<%= @newrelic["api_key"] %>'
+  license_key: '<%= @newrelic["license_key"] %>'
   
   # Agent Enabled
   # Use this setting to force the agent to run or not run.
@@ -148,6 +148,12 @@ common: &default_settings
     # not be captured.  Relevant only when `explain_enabled` is true.
     # Default is 0.5 seconds.
     explain_threshold: 0.5
+
+    # Use this setting to control the variety of transaction traces.
+    # The higher the setting, the greater the variety.
+    # Set this to 0 to always report the slowest transaction trace.
+    # Default is 20.
+    top_n: 20
   
   # Error collector captures information about uncaught exceptions and
   # sends them to New Relic for viewing
