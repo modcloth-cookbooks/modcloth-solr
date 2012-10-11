@@ -69,7 +69,12 @@ end
 smf "solr-master" do
   credentials_user "solr"
   cmd = []
-  cmd << "nohup java -Djetty.port=#{node.solr.master.port}"
+  cmd << "nohup java"
+
+  cmd << "-Xms#{node.solr.memory.xms}" unless node.solr.memory.xms.empty?
+  cmd << "-Xmx#{node.solr.memory.xmx}" unless node.solr.memory.xmx.empty?
+
+  cmd << "-Djetty.port=#{node.solr.master.port}"
   cmd << "-Djava.util.logging.config.file=#{log_configuration}"
   cmd << "-Dsolr.data.dir=#{node.solr.master.home}/solr/data"
 

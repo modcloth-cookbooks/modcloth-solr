@@ -29,3 +29,7 @@ default.solr.newrelic.license_key = ''
 default.solr.newrelic.app_name = 'Solr application'
 default.solr.newrelic.jar = "/opt/solr/newrelic/newrelic.jar"
 default.solr.newrelic.remote_jar_file = ""
+
+default.solr.memory = {}
+default.solr.memory.xmx = ""
+default.solr.memory.xms = ""

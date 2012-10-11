@@ -3,7 +3,7 @@ maintainer_email "ops@modcloth.com"
 license          "Apache 2.0"
 description      "Installs/Configures solr"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          "0.0.6"
+version          "0.0.7"
 
 depends "java"
 depends "smf"
@@ -30,6 +30,20 @@ attribute "solr/auto_commit/max_time",
   :display_name => "Solr Auto-commit max time",
   :description => "Maximum time (in milliseconds) before queued document writes are committed. solr/auto_commit/max_docs must also be set for this to take effect.",
   :type => "string",
+  :required => "recommended"
+
+attribute "solr/memory/xms",
+  :display_name => "Solr min memory",
+  :description => "Minimum JVM memory allocation for Solr (-Xms), eg 1000M [leave empty for default JVM behavior]",
+  :type => "string",
+  :default => "",
+  :required => "recommended"
+
+attribute "solr/memory/xmx",
+  :display_name => "Solr max memory",
+  :description => "Maximum JVM memory allocation for Solr (-Xmx), eg 5000M [leave empty for default JVM behavior]",
+  :type => "string",
+  :default => "",
   :required => "recommended"
 
 attribute "solr/smf_path",

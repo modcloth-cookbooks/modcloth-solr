@@ -61,7 +61,12 @@ end
 smf "solr-replica" do
   credentials_user "solr"
   cmd = []
-  cmd << "nohup java -Djetty.port=#{node.solr.replica.port}"
+  cmd << "nohup java"
+
+  cmd << "-Xms#{node.solr.memory.xms}" unless node.solr.memory.xms.empty?
+  cmd << "-Xmx#{node.solr.memory.xmx}" unless node.solr.memory.xmx.empty?
+
+  cmd << "-Djetty.port=#{node.solr.replica.port}"
   cmd << "-Djava.util.logging.config.file=#{log_configuration}"
   cmd << "-Dreplication.url=http://#{node.solr.master.hostname}:#{node.solr.master.port}/solr/replication"
   cmd << "-Dsolr.data.dir=#{node.solr.replica.home}/solr/data"
