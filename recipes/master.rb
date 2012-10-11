@@ -40,6 +40,15 @@ template log_configuration do
   not_if { File.exists?("#{node.solr.master.home}/log.conf") }
 end
 
+remote_directory "#{node.solr.master.home}/solr/bin" do
+  source "bin"
+  files_owner "solr"
+  files_mode "0755"
+  owner "solr"
+  mode "0755"
+end
+
+
 template "#{node.solr.master.home}/solr/conf/solrconfig.xml" do
   owner "solr"
   mode "0600"
