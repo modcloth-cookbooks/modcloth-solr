@@ -3,9 +3,13 @@ if node.solr.newrelic.license_key.to_s.empty?
 else
   log("solr license_key set, installation of newrelic.jar") { level :info }
 
-  directory File.dirname(node.solr.newrelic.jar) do
+  user = "solr"
+  dir = ::File.dirname(node.solr.newrelic.jar)
+
+  directory "#{dir}/logs" do
     owner user
     mode 0755
+    recursive true
   end
 
 	remote_file node.solr.newrelic.jar do
@@ -16,7 +20,7 @@ else
 
   log("node.solr.newrelic -> #{node.solr.newrelic.inspect}") { level :info }
 
-  template ::File.join(::File.dirname(node.solr.newrelic.jar), 'newrelic.yml') do
+  template ::File.join(dir, 'newrelic.yml') do
     source "newrelic.yml.erb"
     owner user
     mode 0644
