@@ -3,7 +3,7 @@ maintainer_email "ops@modcloth.com"
 license          "Apache 2.0"
 description      "Installs/Configures solr"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          "0.0.7"
+version          "0.0.8"
 
 depends "java"
 depends "smf"
@@ -113,3 +113,10 @@ attribute "solr/newrelic/environment",
   :type => "string",
   :default => "demo",
   :required => "recommended"
+
+attribute "solr/jvm_flags",
+  :display_name => "Solr JVM flags",
+  :description => "Extra flags to pass to the JVM (eg -d64 for 64bit mode)",
+  :type => "string",
+  :default => "",
+  :required => "optional"

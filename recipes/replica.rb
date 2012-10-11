@@ -63,6 +63,8 @@ smf "solr-replica" do
   cmd = []
   cmd << "nohup java"
 
+  cmd << node.solr.jvm_flags
+
   cmd << "-Xms#{node.solr.memory.xms}" unless node.solr.memory.xms.empty?
   cmd << "-Xmx#{node.solr.memory.xmx}" unless node.solr.memory.xmx.empty?
 

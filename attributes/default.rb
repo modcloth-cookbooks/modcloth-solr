@@ -33,3 +33,5 @@ default.solr.newrelic.remote_jar_file = ""
 default.solr.memory = {}
 default.solr.memory.xmx = ""
 default.solr.memory.xms = ""
+
+default.solr.jvm_flags = ""
