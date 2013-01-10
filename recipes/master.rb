@@ -98,17 +98,11 @@ smf "solr-master" do
   working_directory node.solr.master.home
 end
 
-solr_master = rbac "solr-master"
 node.solr.users.each do |user|
-  if user != "solr" && user != "root"
-    ruby_block "Allow user #{user} to manage solr master" do
-      block do
-        Chef::Resource::Rbac.permissions[user] ||= []
-        Chef::Resource::Rbac.permissions[user] << "solr-master"
-        notifies :apply, solr_master
-      end
-      only_if "id -u #{user}"
-    end
+  rbac "solr-master" do
+    user user
+    action :add_management_permissions
+    not_if { user == "root" }
   end
 end
 

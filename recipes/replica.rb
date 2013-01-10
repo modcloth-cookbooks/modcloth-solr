@@ -91,17 +91,11 @@ smf "solr-replica" do
   working_directory node.solr.replica.home
 end
 
-solr_replica = rbac "solr-replica"
 node.solr.users.each do |user|
-  if user != "solr" && user != "root"
-    ruby_block "Allow user #{user} to manage solr replica" do
-      block do
-        Chef::Resource::Rbac.permissions[user] ||= []
-        Chef::Resource::Rbac.permissions[user] << "solr-replica"
-        notifies :apply, solr_replica
-      end
-      only_if "id -u #{user}"
-    end
+  rbac "solr-replica" do
+    user user
+    action :add_management_permissions
+    not_if { user == "root" }
   end
 end
 
