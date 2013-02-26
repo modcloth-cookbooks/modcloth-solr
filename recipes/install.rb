@@ -21,28 +21,23 @@ include_recipe "solr::user"
 
 user = "solr"
 
-package_sha1_checksum = {
-  '3.6.0' => '558cdf145ab3bf22fb5d168d3f657df796bda639'
-}.fetch(node.solr.version)
+remote_file             = node.solr.remote_file                # http://.../apache-solr-3.6.2.tgz
+local_file              = remote_file.gsub(%r{.*/}, '')        # apache-solr-3.6.2.tgz
+local_dir               = local_file.gsub(%r{\.tgz}, '')       # apache-solr-3.6.2.tgz
 
+node["solr"]["version"] = local_dir.gsub(%r{.*-}, '')          # 3.6.2
 
-remote_file "#{Chef::Config[:file_cache_path]}/apache-solr-3.6.0.tgz" do
-	source "http://www.trieuvan.com/apache/lucene/solr/3.6.0/apache-solr-3.6.0.tgz"
+remote_file "#{Chef::Config[:file_cache_path]}/#{local_file}" do
+	source remote_file
 	mode "0744"
-	# checksum package_sha1_checksum XXX this does not appear to work.  perhaps it's trieuvan.com's fault?
-	not_if { File.directory?("#{Chef::Config[:file_cache_path]}/apache-solr-3.6.0") }
+	not_if { File.directory?("#{Chef::Config[:file_cache_path]}/#{local_dir}") }
 end
 
-execute "checksum solr tar file" do
-	command %Q([[ "$(openssl sha1 #{Chef::Config[:file_cache_path]}/apache-solr-3.6.0.tgz)" =~ "#{package_sha1_checksum}" ]])
-	not_if { File.directory?("#{Chef::Config[:file_cache_path]}/apache-solr-3.6.0") }
-end
-
-package_file = "#{Chef::Config[:file_cache_path]}/apache-solr-3.6.0.tgz"
+package_file = "#{Chef::Config[:file_cache_path]}/#{local_file}"
 
 execute "extract solr tar file into tmp" do
   command "cd #{Chef::Config[:file_cache_path]} && tar -xvf #{package_file}"
-  not_if { File.directory?("#{Chef::Config[:file_cache_path]}/apache-solr-#{node.solr.version}") }
+  not_if { File.directory?("#{Chef::Config[:file_cache_path]}/#{local_dir}") }
 end
 
 # install solr
@@ -54,7 +49,7 @@ end
 
 ruby_block "copy example solr home directory" do
   block do
-    ::FileUtils.cp_r "#{Chef::Config[:file_cache_path]}/apache-solr-#{node.solr.version}/example", "/opt/solr-#{node.solr.version}/home_example"
+    ::FileUtils.cp_r "#{Chef::Config[:file_cache_path]}/#{local_dir}/example", "/opt/solr-#{node.solr.version}/home_example"
   end
   not_if { File.exists?("/opt/solr-#{node.solr.version}/home_example") }
 end

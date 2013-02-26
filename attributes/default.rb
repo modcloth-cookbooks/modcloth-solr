@@ -1,4 +1,3 @@
-default.solr.version = '3.6.0'
 default.solr.java_dir = '/usr/java/default'
 default.solr.java_options = '-Dsolr.solr.home=/opt/solr/solr $JAVA_OPTIONS'
 default.solr.jetty_home = '/opt/solr'
@@ -35,3 +34,5 @@ default.solr.memory.xmx = ""
 default.solr.memory.xms = ""
 
 default.solr.jvm_flags = ""
+
+default.solr.remote_file = "http://www.us.apache.org/dist/lucene/solr/3.6.2/apache-solr-3.6.2.tgz"
