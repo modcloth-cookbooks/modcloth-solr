@@ -64,6 +64,9 @@
         <tokenizer class="solr.StandardTokenizerFactory"/>
         <filter class="solr.StandardFilterFactory"/>
         <filter class="solr.LowerCaseFilterFactory"/>
+<%- @filters.each do |filter| -%>
+        <filter <%= filter.map {|key, value| "#{key}=\"#{value}\"" }.join(' ') %> />
+<%- end -%>
       </analyzer>
     </fieldType>
     <!-- *** This fieldType is used by Sunspot! *** -->

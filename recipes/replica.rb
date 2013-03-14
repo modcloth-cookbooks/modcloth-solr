@@ -54,6 +54,7 @@ end
 template "#{node.solr.replica.home}/solr/conf/schema.xml" do
   owner "solr"
   mode "0600"
+  variables "filters" => node.solr.filters
   only_if { node.solr.uses_sunspot }
 end
 

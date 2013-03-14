@@ -14,6 +14,11 @@ default.solr.auto_commit = {
 
 default.solr.only_bind_private_ip = false
 
+default.solr.filters = [
+    # { "class" => "solr.PorterStemFilterFactory" }
+    # { "class" => "solr.DictionaryCompoundWordTokenFilterFactory", "dictionary" => "filename.txt", "minWordSize" => 5 }
+]
+
 default.solr.users = []
 default.solr.master.hostname = 'localhost'
 default.solr.master.port = 9985
