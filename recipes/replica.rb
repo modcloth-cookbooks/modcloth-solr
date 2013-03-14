@@ -88,6 +88,7 @@ smf "solr-replica" do
   cmd << "-jar start.jar &"
   start_command cmd.join(' ')
   start_timeout 300
+  stop_timeout 60
   environment "PATH" => node.solr.smf_path
   working_directory node.solr.replica.home
 end
