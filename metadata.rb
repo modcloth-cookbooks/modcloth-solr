@@ -3,7 +3,7 @@ maintainer_email "ops@modcloth.com"
 license          "Apache 2.0"
 description      "Installs/Configures solr"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          "0.0.12"
+version          "0.1.0"
 
 depends "java"
 depends "smf"
@@ -84,6 +84,12 @@ attribute "solr/replica/port",
 attribute "solr/replica/home",
   :display_name => "Solr replica home",
   :description => "Directory into which solr home will be installed and configured. Defaults to /opt/solr/replica.",
+  :type => "string",
+  :required => "optional"
+
+attribute "solr/replica/replication_search",
+  :display_name => "Solr replication search",
+  :description => "Chef search with which to find a solr master from which to replicate. If this is nil, defaults to node.solr.master.hostname",
   :type => "string",
   :required => "optional"
 

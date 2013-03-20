@@ -16,6 +16,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+def choose_ip(host)
+  if node.solr.only_bind_private_ip
+    addresses = host.network.interfaces.map { |name, i| i['addresses'].keys }.flatten
+    addresses.grep(/^10\.|^172\.1[6-9]\.|^172\.2\d\.|^172\.3[0-1]\.|^192\.168/).first
+  else
+    host.ip_address
+  end
+end
+
+def replication_host_ip
+  if node.solr.replica.replication_search
+    if Chef::Config[:solo]
+      Chef::Log.warn('This recipe uses search. Chef Solo does not support search.')
+    else
+      host = search('node', node.solr.replica.replication_search).first
+      raise('Unable to find solr master') unless host
+      choose_ip(host)
+    end
+  else
+    node.solr.master.hostname
+  end
+end
+
 include_recipe "solr::user"
 include_recipe "solr::install"
 include_recipe "solr::install_newrelic"
@@ -58,6 +81,9 @@ template "#{node.solr.replica.home}/solr/conf/schema.xml" do
   only_if { node.solr.uses_sunspot }
 end
 
+replication_host = replication_host_ip
+bind_ip = choose_ip(node)
+
 # create/import smf manifest
 smf "solr-replica" do
   credentials_user "solr"
@@ -71,14 +97,11 @@ smf "solr-replica" do
 
   cmd << "-Djetty.port=#{node.solr.replica.port}"
   cmd << "-Djava.util.logging.config.file=#{log_configuration}"
-  cmd << "-Dreplication.url=http://#{node.solr.master.hostname}:#{node.solr.master.port}/solr/replication"
+  cmd << "-Dreplication.url=http://#{replication_host}:#{node.solr.master.port}/solr/replication"
   cmd << "-Dsolr.data.dir=#{node.solr.replica.home}/solr/data"
 
   if node.solr.only_bind_private_ip
-    addresses = node.network.interfaces.map { |name, i| i['addresses'].keys }.flatten
-
-    bind_address = addresses.grep(/^10\.|^172\.1[6-9]\.|^172\.2\d\.|^172\.3[0-1]\.|^192\.168/).first
-    cmd << "-Djetty.host=#{bind_address}"
+    cmd << "-Djetty.host=#{bind_ip}"
   end
 
   # Add NewRelic to start command if an API key is present

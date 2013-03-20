@@ -26,6 +26,7 @@ default.solr.master.home = '/opt/solr/master'
 
 default.solr.replica.port = 8983
 default.solr.replica.home = '/opt/solr/replica'
+default.solr.replica.replication_search = nil
 
 default.solr.newrelic = {}
 default.solr.newrelic.environment = 'demo'
