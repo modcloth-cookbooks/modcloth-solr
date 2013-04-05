@@ -13,6 +13,7 @@ default.solr.auto_commit = {
 }
 
 default.solr.only_bind_private_ip = false
+default.solr.bind_localhost = false
 
 default.solr.filters = [
     # { "class" => "solr.PorterStemFilterFactory" }

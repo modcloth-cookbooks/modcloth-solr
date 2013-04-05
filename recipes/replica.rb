@@ -102,6 +102,8 @@ smf "solr-replica" do
 
   if node.solr.only_bind_private_ip
     cmd << "-Djetty.host=#{bind_ip}"
+  elsif node.solr.bind_localhost
+    cmd << "-Djetty.host=127.0.0.1"
   end
 
   # Add NewRelic to start command if an API key is present
