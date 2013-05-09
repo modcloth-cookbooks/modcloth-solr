@@ -25,7 +25,7 @@ remote_file             = node.solr.remote_file                # http://.../apac
 local_file              = remote_file.gsub(%r{.*/}, '')        # apache-solr-3.6.2.tgz
 local_dir               = local_file.gsub(%r{\.tgz}, '')       # apache-solr-3.6.2.tgz
 
-node["solr"]["version"] = local_dir.gsub(%r{.*-}, '')          # 3.6.2
+node.set["solr"]["version"] = local_dir.gsub(%r{.*-}, '')          # 3.6.2
 
 remote_file "#{Chef::Config[:file_cache_path]}/#{local_file}" do
 	source remote_file
