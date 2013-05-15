@@ -62,8 +62,8 @@ end
 template "#{node.solr.master.home}/solr/conf/schema.xml" do
   owner "solr"
   mode "0600"
-  variables "filters" => node.solr.filters
-  only_if { node.solr.uses_sunspot }
+  variables "text_filters" => node.solr.text_filters
+  only_if { node.solr.uses_sunspot_schema }
 end
 
 # create/import smf manifest

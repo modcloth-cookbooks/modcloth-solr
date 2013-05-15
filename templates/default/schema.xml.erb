@@ -64,7 +64,7 @@
         <tokenizer class="solr.StandardTokenizerFactory"/>
         <filter class="solr.StandardFilterFactory"/>
         <filter class="solr.LowerCaseFilterFactory"/>
-<%- @filters.each do |filter| -%>
+<%- @text_filters.each do |filter| -%>
         <filter <%= filter.map {|key, value| "#{key}=\"#{value}\"" }.join(' ') %> />
 <%- end -%>
       </analyzer>

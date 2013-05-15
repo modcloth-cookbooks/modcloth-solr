@@ -5,7 +5,7 @@ default.solr.jetty_user = 'solr'
 default.solr.jetty_log_dir = '/opt/solr/logs'
 
 default.solr.smf_path = '/opt/local/bin:/opt/local/sbin:/usr/bin:/usr/sbin'
-default.solr.uses_sunspot = true
+default.solr.uses_sunspot_schema = true
 
 default.solr.auto_commit = {
   :max_docs => nil,
@@ -15,7 +15,7 @@ default.solr.auto_commit = {
 default.solr.only_bind_private_ip = false
 default.solr.bind_localhost = false
 
-default.solr.filters = [
+default.solr.text_filters = [
     # { "class" => "solr.PorterStemFilterFactory" }
     # { "class" => "solr.DictionaryCompoundWordTokenFilterFactory", "dictionary" => "filename.txt", "minWordSize" => 5 }
 ]
