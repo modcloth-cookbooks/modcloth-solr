@@ -119,9 +119,10 @@ smf "solr-replica" do
 end
 
 node.solr.users.each do |user|
-  rbac "solr-replica" do
+  rbac_auth "Allow #{user} to administer solr-replica" do
     user user
-    action :add_management_permissions
+    auth "solr-replica"
+    action :add
     not_if { user == "root" }
   end
 end

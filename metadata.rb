@@ -3,10 +3,10 @@ maintainer_email "ops@modcloth.com"
 license          "Apache 2.0"
 description      "Installs/Configures solr"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          "1.1.0"
+version          "2.0.0"
 
 depends "java"
-depends "smf", '< 1.0.0'
+depends "smf", '>= 1.0.0'
 
 attribute "solr/only_bind_private_ip",
   :display_name => "Bind Private IP",

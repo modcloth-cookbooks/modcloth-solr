@@ -103,10 +103,11 @@ smf "solr-master" do
 end
 
 node.solr.users.each do |user|
-  rbac "solr-master" do
+  rbac_auth "Allow #{user} to administer solr-master" do
     user user
-    action :add_management_permissions
+    auth "solr-master"
     not_if { user == "root" }
+    action :add
   end
 end
 
