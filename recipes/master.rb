@@ -37,7 +37,7 @@ template log_configuration do
   source "solr-master-log.conf.erb"
   owner "solr"
   mode "0700"
-  not_if { File.exists?("#{node.solr.master.home}/log.conf") }
+  notifies :restart, 'service[solr-master]'
 end
 
 remote_directory "#{node.solr.master.home}/solr/bin" do

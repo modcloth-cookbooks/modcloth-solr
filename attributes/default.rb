@@ -3,6 +3,8 @@ default.solr.java_options = '-Dsolr.solr.home=/opt/solr/solr $JAVA_OPTIONS'
 default.solr.jetty_home = '/opt/solr'
 default.solr.jetty_user = 'solr'
 default.solr.jetty_log_dir = '/opt/solr/logs'
+default.solr.jetty_log_size = 1_000_000_000
+default.solr.jetty_log_count = 4
 
 default.solr.smf_path = '/opt/local/bin:/opt/local/sbin:/usr/bin:/usr/sbin'
 default.solr.uses_sunspot_schema = true

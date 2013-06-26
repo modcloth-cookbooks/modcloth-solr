@@ -62,7 +62,7 @@ template log_configuration do
   source "solr-replica-log.conf.erb"
   owner "solr"
   mode "0700"
-  not_if { File.exists?("#{node.solr.replica.home}/log.conf") }
+  notifies :restart, 'service[solr-replica]'
 end
 
 template "#{node.solr.replica.home}/solr/conf/solrconfig.xml" do
