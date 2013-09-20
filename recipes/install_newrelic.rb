@@ -12,13 +12,14 @@ else
     recursive true
   end
 
-	remote_file node.solr.newrelic.jar do
-		source node.solr.newrelic.remote_jar_file
-		mode "0744"
-		not_if { File.file?(node.solr.newrelic.jar) || node.solr.newrelic.remote_jar_file.empty? }
-	end
+  remote_file node.solr.newrelic.jar do
+    source node.solr.newrelic.remote_jar_file
+    mode "0744"
+    checksum node.solr.newrelic.jar_checksum
+    not_if { node.solr.newrelic.remote_jar_file.empty? }
+  end
 
-  log("node.solr.newrelic -> #{node.solr.newrelic.inspect}") { level :info }
+  Chef::Log.info("node.solr.newrelic -> #{node.solr.newrelic.inspect}")
 
   template ::File.join(dir, 'newrelic.yml') do
     source "newrelic.yml.erb"

@@ -36,6 +36,7 @@ default.solr.newrelic.environment = 'demo'
 default.solr.newrelic.license_key = ''
 default.solr.newrelic.app_name = 'Solr application'
 default.solr.newrelic.jar = "/opt/solr/newrelic/newrelic.jar"
+default.solr.newrelic.jar_checksum = nil     # calculate with `openssl dgst -sha256 $filename`
 default.solr.newrelic.remote_jar_file = ""
 
 default.solr.memory = {}
