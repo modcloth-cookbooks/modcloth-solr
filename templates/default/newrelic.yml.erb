@@ -76,7 +76,7 @@ common: &default_settings
   # asynchronously to the threads that process your application code,
   # so it should not impact response times.
   # Default is false.
-  ssl: false
+  ssl: true
   
   # Proxy settings for connecting to the New Relic server.
   #
@@ -181,6 +181,15 @@ common: &default_settings
     # Default is 300 seconds (5 minutes).
     #
     # stall_threshold: 300.0
+
+  # Cross Application Tracing adds request and response headers to
+  # external calls using the Apache HttpClient libraries to provided better
+  # performance data when calling applications monitored by other New Relic Agents.
+  #
+  cross_application_tracer:
+    # Set to true to enable cross application tracing.
+    # Default is true.
+    enabled: true
 
   # Thread profiler measures wall clock time, CPU time, and method call counts
   # in your application's threads as they run.
