@@ -26,6 +26,7 @@ default.solr.users = []
 default.solr.master.hostname = 'localhost'
 default.solr.master.port = 9985
 default.solr.master.home = '/opt/solr/master'
+default.solr.master.replicated_configs = ["schema.xml", "stopwords.txt"]
 
 default.solr.replica.port = 8983
 default.solr.replica.home = '/opt/solr/replica'

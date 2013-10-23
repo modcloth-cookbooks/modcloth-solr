@@ -514,7 +514,7 @@
     <lst name="master">
       <str name="replicateAfter">commit</str>
       <str name="replicateAfter">startup</str>
-      <str name="confFiles">schema.xml,stopwords.txt</str>
+      <str name="confFiles"><%= @config["master"]["replicated_configs"].join(",") %></str>
     </lst>
   <% elsif @role == "replica" %>
     <lst name="slave">
