@@ -1,3 +1,5 @@
+# This repo has been deprecated in favor of [modcloth/modcloth-solr](https://github.com/modcloth/modcloth-solr).
+
 ## DESCRIPTION:
 
 Install Solr as either a master or a replica.
